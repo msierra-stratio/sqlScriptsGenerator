@@ -1,3 +1,4 @@
+/*
 package script_gen;
 
 import java.io.BufferedWriter;
@@ -97,3 +98,4 @@ public class ScriptQualitySummaryGenerator {
 	}
 
 }
+*/
