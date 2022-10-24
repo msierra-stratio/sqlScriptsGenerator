@@ -22,8 +22,14 @@ public class ScriptCosmosIssues {
 	private static final String[] CONCEPTS_VALUES = {"blockbuster.actor", "blockbuster.director", "blockbuster.film"};
 	private static final String[] NAME_VALUES = {"BLOACT", "BLODIR", "BLOFIL"};
 	private static final String[] STATUSES_VALUES = {"ACTIVE", "SOLVED", "DISCARDED"};
-	private static final String[] TYPES_VALUES = {"MERGE", "DUPLICATE_DETECTION"};
+	private static final String[] TYPES_VALUES = {"MERGE", "ROW_DUPLICATE"};
 	private static final String[] USERS_VALUES = {"m.perez", "a.garcia", "h.molina"};
+
+	/*
+	issue_type = [ROW_DUPLICATE, MERGE,SPLIT]
+	issue_status = [ACTIVE, SOLVED,DISCARDED]
+	category =[GOLDEN_RECORDS, QUALITY]
+	* */
 
 	private static final String[] DATES_VALUES = {"2022-01-day hour:min:27", "2022-02-day hour:min:02", "2022-03-day hour:min:51",
 			"2022-04-day hour:min:00", "2022-05-day hour:min:33", "2022-06-day hour:min:34",
@@ -36,7 +42,7 @@ public class ScriptCosmosIssues {
 
 	private static final String HEADER = "INSERT INTO ISSUE_MANAGER.MDM_ISSUES (id, name,description,observations,type,category,status,created_by,assigned_to,concept_id,confidence,operation,discard_code_reason,discard_observations,last_updated,audit,logical_delete) VALUES\n";
 
-	private static final String BASE_VALUES = "(id_reg, 'name_val', 'descr_val', 'obs_val', 'type_val', 'GOLDEN_RECORD', 'status_val', 'creatoruser' , 'assigned_to_val', 'concept_val', confidence_val, operation_val, NULL, NULL, 'last_updated_val' , NULL, false),\n";
+	private static final String BASE_VALUES = "(id_reg, 'name_val', 'descr_val', 'obs_val', 'type_val', 'GOLDEN_RECORDS', 'status_val', 'creatoruser' , 'assigned_to_val', 'concept_val', confidence_val, operation_val, NULL, NULL, 'last_updated_val' , NULL, false),\n";
 
 	public static void main (String [ ] args) {
 
