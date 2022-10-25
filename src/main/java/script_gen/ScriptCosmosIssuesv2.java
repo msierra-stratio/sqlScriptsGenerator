@@ -20,7 +20,6 @@ import java.util.Random;
 
 public class ScriptCosmosIssuesv2 {
 
-	private static final String ID_REG = "id_reg";
 	private static final String GID = "gid";
 	private static final String PID_VALUE ="processId_value";
 	private static final String ROWS_AFF_VAL ="rows_aff_val";
@@ -67,10 +66,10 @@ category =[GOLDEN_RECORDS, QUALITY]
 			"\"age\":\"gid13\"}}";
 
 
-	private static final String HEADER = "INSERT INTO ISSUE_MANAGER.MDM_ISSUES (id, version, rows_affected, primary_keys_properties, name, description, observations, issue_type, category, " +
+	private static final String HEADER = "INSERT INTO ISSUE_MANAGER.MDM_ISSUES (rows_affected, primary_keys_properties, name, description, observations, issue_type, category, " +
 			"issue_status, created_by, assigned_to, concept_id, confidence, operation, discard_code_reason, discard_observations, last_updated, audit, logical_delete) VALUES\n";
 
-	private static final String BASE_VALUES = "(id_reg, 1, '{rows_aff_val}', '{\"first_name\", \"last_name\"}', 'name_val', 'descr_val', 'obs_val', 'type_val', 'GOLDEN_RECORDS', 'status_val', 'creatoruser' , 'assigned_to_val', 'concept_val', confidence_val, operation_val, NULL, NULL, 'last_updated_val' , NULL, false),\n";
+	private static final String BASE_VALUES = "('{rows_aff_val}', '{\"first_name\", \"last_name\"}', 'name_val', 'descr_val', 'obs_val', 'type_val', 'GOLDEN_RECORDS', 'status_val', 'creatoruser' , 'assigned_to_val', 'concept_val', confidence_val, operation_val, NULL, NULL, 'last_updated_val' , NULL, false),\n";
 
 	public static void main (String [ ] args) {
 
@@ -177,7 +176,7 @@ category =[GOLDEN_RECORDS, QUALITY]
 			}
 			System.out.println("Doing reg " + id_reg + " ...");
 
-			aux = aux.replace(ID_REG, ""+id_reg).replace(NAME_VAL, name + "-" + id_reg)
+			aux = aux.replace(NAME_VAL, name)
 					.replace(ROWS_AFF_VAL, rowsAffected)
 					.replace(DESCR_VAL, "description value -- " + name )
 					.replace(OBS_VAL, "observations_val -- " + name)
@@ -243,7 +242,7 @@ category =[GOLDEN_RECORDS, QUALITY]
 			}
 		}
 
-		aux = aux.replace(ID_REG, "100").replace(NAME_VAL, name + "-100" )
+		aux = aux.replace(NAME_VAL, name)
 				.replace(ROWS_AFF_VAL, rowsAffected)
 				.replace(DESCR_VAL, "description value -- " + name )
 				.replace(OBS_VAL, "observations_val -- " + name)
