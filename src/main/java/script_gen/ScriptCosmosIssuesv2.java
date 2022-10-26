@@ -171,7 +171,7 @@ category =[GOLDEN_RECORDS, QUALITY]
 				operation = "'" + OPERATION_VALUES + "'";
 				for(int i=1 ; i<=13; i++){
 					randomGidInMergeProposal = r.nextInt(currentGids.size());
-					operation = operation.replace(GID+i, currentGids.get(randomGidInMergeProposal));
+					operation = operation.replaceFirst(GID+i, currentGids.get(randomGidInMergeProposal));
 				}
 			}
 			System.out.println("Doing reg " + id_reg + " ...");
@@ -238,7 +238,7 @@ category =[GOLDEN_RECORDS, QUALITY]
 			operation = "'" + OPERATION_VALUES + "'";
 			for(int i=1 ; i<=13; i++){
 				randomGidInMergeProposal = r.nextInt(currentGids.size());
-				operation = operation.replace(GID+i, currentGids.get(randomGidInMergeProposal));
+				operation = operation.replaceFirst(GID+i, currentGids.get(randomGidInMergeProposal));
 			}
 		}
 
