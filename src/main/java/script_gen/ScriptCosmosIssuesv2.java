@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,14 +37,8 @@ public class ScriptCosmosIssuesv2 {
 	private static final String CONCEPTS_VALUES = "blockbuster.actor";
 	private static final String NAME_VALUES = "BLOACT";
 	private static final String[] STATUSES_VALUES = {"ACTIVE", "SOLVED", "DISCARDED"};
-	private static final String[] TYPES_VALUES = {"MERGE", "ROW_DUPLICATE"};
+	private static final String[] TYPES_VALUES = {"MERGE"};
 	private static final String[] USERS_VALUES = {"m.perez", "a.garcia", "h.molina"};
-
-	/*
-issue_type = [ROW_DUPLICATE, MERGE,SPLIT]
-issue_status = [ACTIVE, SOLVED,DISCARDED]
-category =[GOLDEN_RECORDS, QUALITY]
-* */
 
 	private static final String[] DATES_VALUES = {"2022-01-day hour:min:27", "2022-02-day hour:min:02", "2022-03-day hour:min:51",
 			"2022-04-day hour:min:00", "2022-05-day hour:min:33", "2022-06-day hour:min:34",
@@ -130,7 +123,7 @@ category =[GOLDEN_RECORDS, QUALITY]
 			numberOfAffected = r.nextInt(4);
 			if(numberOfAffected < 2)
 				numberOfAffected = 2;
-			typeDecision = r.nextInt(2);
+			typeDecision = 0;
 			dateDecision = id_reg / 10;
 			randomInsertOperation = r.nextInt(30);
 
@@ -198,7 +191,7 @@ category =[GOLDEN_RECORDS, QUALITY]
 		numberOfAffected = r.nextInt(4);
 		if(numberOfAffected < 2)
 			numberOfAffected = 2;
-		typeDecision = r.nextInt(2);
+		typeDecision = 0;
 		randomInsertOperation = r.nextInt(30);
 
 		name = NAME_VALUES;
