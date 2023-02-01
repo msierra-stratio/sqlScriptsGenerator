@@ -31,10 +31,12 @@ public class ScriptCosmosIssuesv2 {
 	private static final String ASSIGNED_TO_VAL = "assigned_to_val";
 	private static final String CONCEPT_VAL = "concept_val";
 	private static final String CONFIDENCE_VAL = "confidence_val";
+	private static final String THRESHOLD_VAL = "threshold_val";
+	private static final String SCORE_VAL = "score_val";
 	private static final String OPERATION_VAL = "operation_val";
 	private static final String LAST_UPDATED_VAL = "last_updated_val";
 
-	private static final String CONCEPTS_VALUES = "blockbuster.actor";
+	private static final String CONCEPTS_VALUES = "mdm_blockbuster.actor";
 	private static final String NAME_VALUES = "BLOACT";
 	private static final String[] STATUSES_VALUES = {"ACTIVE", "SOLVED", "DISCARDED"};
 	private static final String[] TYPES_VALUES = {"MERGE"};
@@ -56,13 +58,15 @@ public class ScriptCosmosIssuesv2 {
 			"\"post\":\"gid10\"," +
 			"\"city\":\"gid11\"," +
 			"\"state\":\"gid12\"," +
-			"\"age\":\"gid13\"}}";
+			"\"age\":\"gid13\"}," +
+			"\"score\":score_val" +
+			"}";
 
 
 	private static final String HEADER = "INSERT INTO ISSUE_MANAGER.MDM_ISSUES (rows_affected, primary_keys_properties, name, description, observations, issue_type, category, " +
-			"issue_status, created_by, assigned_to, concept_id, confidence, operation, discard_code_reason, discard_observations, last_updated, audit, logical_delete) VALUES\n";
+			"issue_status, created_by, assigned_to, concept_id, confidence, threshold, operation, discard_code_reason, discard_observations, last_updated, audit, logical_delete) VALUES\n";
 
-	private static final String BASE_VALUES = "('{rows_aff_val}', '{\"first_name\", \"last_name\"}', 'name_val', 'descr_val', 'obs_val', 'type_val', 'GOLDEN_RECORDS', 'status_val', 'creatoruser' , 'assigned_to_val', 'concept_val', confidence_val, operation_val, NULL, NULL, 'last_updated_val' , NULL, false),\n";
+	private static final String BASE_VALUES = "('{rows_aff_val}', '{\"first_name\", \"last_name\"}', 'name_val', 'descr_val', 'obs_val', 'type_val', 'GOLDEN_RECORDS', 'status_val', 'creatoruser' , 'assigned_to_val', 'concept_val', confidence_val, threshold_val, operation_val, NULL, NULL, 'last_updated_val' , NULL, false),\n";
 
 	public static void main (String [ ] args) {
 
@@ -88,6 +92,8 @@ public class ScriptCosmosIssuesv2 {
 		Random r = new Random();
 
 		double confidence;
+		double threshold;
+		double score;
 		int statusDecision;
 		int userDecision;
 //		int conceptAndNameDecision;
@@ -117,6 +123,8 @@ public class ScriptCosmosIssuesv2 {
 			currentGids = new ArrayList<>();
 			rowsAffected = "";
 			confidence = (r.nextInt(100) * 1.0) + (r.nextInt(9) * 0.1);
+			threshold = (r.nextInt(100) * 1.0) + (r.nextInt(9) * 0.1);
+			score = (r.nextInt(100) * 1.0) + (r.nextInt(9) * 0.1);
 			statusDecision = r.nextInt(3);
 			userDecision = r.nextInt(3);
 			//conceptAndNameDecision = r.nextInt(3);
@@ -166,6 +174,7 @@ public class ScriptCosmosIssuesv2 {
 					randomGidInMergeProposal = r.nextInt(currentGids.size());
 					operation = operation.replaceFirst(GID+i, currentGids.get(randomGidInMergeProposal));
 				}
+				operation = operation.replace(SCORE_VAL, "" + score);
 			}
 			System.out.println("Doing reg " + id_reg + " ...");
 
@@ -176,6 +185,7 @@ public class ScriptCosmosIssuesv2 {
 					.replace(TYPE_VAL, type).replace(STATUS_VAL, status)
 					.replace(ASSIGNED_TO_VAL, user).replace(CONCEPT_VAL, concept)
 					.replace(CONFIDENCE_VAL, ""+confidence)
+					.replace(THRESHOLD_VAL, ""+threshold)
 					.replace(OPERATION_VAL, operation).replace(LAST_UPDATED_VAL, date);
 
 			result = result + aux;
@@ -185,6 +195,8 @@ public class ScriptCosmosIssuesv2 {
 		rowsAffected = "";
 		currentGids = new ArrayList<>();
 		confidence = (r.nextInt(100) * 1.0) + (r.nextInt(9) * 0.1);
+		threshold = (r.nextInt(100) * 1.0) + (r.nextInt(9) * 0.1);
+		score = (r.nextInt(100) * 1.0) + (r.nextInt(9) * 0.1);
 		statusDecision = r.nextInt(3);
 		userDecision = r.nextInt(3);
 //		conceptAndNameDecision = r.nextInt(3);
@@ -233,6 +245,7 @@ public class ScriptCosmosIssuesv2 {
 				randomGidInMergeProposal = r.nextInt(currentGids.size());
 				operation = operation.replaceFirst(GID+i, currentGids.get(randomGidInMergeProposal));
 			}
+			operation = operation.replace(SCORE_VAL, "" + score);
 		}
 
 		aux = aux.replace(NAME_VAL, name)
@@ -242,6 +255,7 @@ public class ScriptCosmosIssuesv2 {
 				.replace(TYPE_VAL, type).replace(STATUS_VAL, status)
 				.replace(ASSIGNED_TO_VAL, user).replace(CONCEPT_VAL, concept)
 				.replace(CONFIDENCE_VAL, ""+confidence)
+				.replace(THRESHOLD_VAL, ""+threshold)
 				.replace(OPERATION_VAL, operation)
 				.replace(LAST_UPDATED_VAL, date)
 				.replace("),", ");");
